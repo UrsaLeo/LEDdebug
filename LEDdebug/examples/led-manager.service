@@ -1,0 +1,18 @@
+[Unit]
+Description=UrsaLeo LED Board Manager
+
+After=sysinit.target
+
+[Service]
+Type=simple
+KillSignal=SIGINT
+
+ExecStartPre=/bin/sh -c "modprobe i2c-dev"
+
+WorkingDirectory=/usr/lib/led
+ExecStart=/usr/bin/python3 -u led-manager.py \
+    --service1='/tmp/LED1' \
+    --service2='/tmp/LED2'
+
+[Install]
+WantedBy=multi-user.target
