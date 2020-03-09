@@ -110,9 +110,9 @@ class LEDdebug:
     def set_leds(self, status):
         """Turn all LED pins (GP0-5) ON or OFF"""
         if status == ON:
-            self.bus.write_byte_data(self.i2c_addr, OLAT_ADDR, 0xc0)
+            self.bus.write_byte_data(self.i2c_addr, GPIO_ADDR, 0xc0)
         else:
-            self.bus.write_byte_data(self.i2c_addr, OLAT_ADDR, 0x3f)
+            self.bus.write_byte_data(self.i2c_addr, GPIO_ADDR, 0x3f)
 
     def set_led(self, led, status):
         """ Turn individual LED pin ON or OFF
@@ -122,7 +122,7 @@ class LEDdebug:
             # Get the current value of outputs
             byte = self.set_bit(self.get_gpio(), pin, status)
             # Update outputs to new value
-            self.bus.write_byte_data(self.i2c_addr, OLAT_ADDR, byte)
+            self.bus.write_byte_data(self.i2c_addr, GPIO_ADDR, byte)
         else:
             print('Invalid LED value', led)
             exit(0)
